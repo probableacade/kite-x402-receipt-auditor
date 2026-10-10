@@ -18,9 +18,9 @@ type Receipt struct {
 
 // Decision captures a deterministic audit result.
 type Decision struct {
-	ReceiptID string   `json:"receiptId"`
-	Accepted  bool     `json:"accepted"`
-	Reasons   []string `json:"reasons"`
-	RiskScore int      `json:"riskScore"`
+	ReceiptID string    `json:"receiptId"`
+	Accepted  bool      `json:"accepted"`
+	Reasons   []string  `json:"reasons"`
+	RiskScore int       `json:"riskScore"`
 	CheckedAt time.Time `json:"checkedAt"`
 }
