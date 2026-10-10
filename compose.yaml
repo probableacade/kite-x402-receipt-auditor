@@ -1,0 +1,20 @@
+services:
+  auditor:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      ALLOWED_CHAIN_IDS: "2368"
+      ALLOWED_TOKENS: "USDC"
+      ALLOWED_RESOURCE_HOSTS: "api.example.com"
+      MAX_PAYMENT_AMOUNT: "100"
+    volumes:
+      - auditor-data:/data
+    read_only: true
+    tmpfs:
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
+
+volumes:
+  auditor-data:
