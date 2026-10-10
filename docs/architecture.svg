@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="500" viewBox="0 0 1200 500" role="img" aria-labelledby="title desc">
+  <title id="title">Kite x402 Receipt Auditor architecture</title>
+  <desc id="desc">A client sends payment evidence through the audit API to policy checks and a replay-safe ledger before the protected service grants access.</desc>
+  <defs><linearGradient id="bg" x1="0" x2="1"><stop stop-color="#08110f"/><stop offset="1" stop-color="#123d31"/></linearGradient><filter id="shadow"><feDropShadow dx="0" dy="12" stdDeviation="12" flood-opacity=".35"/></filter></defs>
+  <rect width="1200" height="500" rx="28" fill="url(#bg)"/>
+  <text x="60" y="70" fill="#5bf0b5" font-family="system-ui" font-size="18" font-weight="700" letter-spacing="3">PAYMENT EVIDENCE FLOW</text>
+  <g font-family="system-ui" text-anchor="middle" filter="url(#shadow)">
+    <g transform="translate(60 145)"><rect width="220" height="170" rx="20" fill="#10241d" stroke="#2d6a56"/><text x="110" y="68" fill="#e8fff7" font-size="26" font-weight="700">x402 Client</text><text x="110" y="105" fill="#89ad9e" font-size="17">Receipt + resource</text></g>
+    <g transform="translate(360 145)"><rect width="220" height="170" rx="20" fill="#10241d" stroke="#4ee5aa"/><text x="110" y="68" fill="#e8fff7" font-size="26" font-weight="700">Audit API</text><text x="110" y="105" fill="#89ad9e" font-size="17">Normalize + score</text></g>
+    <g transform="translate(660 100)"><rect width="220" height="120" rx="20" fill="#10241d" stroke="#2d6a56"/><text x="110" y="52" fill="#e8fff7" font-size="23" font-weight="700">Policy Engine</text><text x="110" y="83" fill="#89ad9e" font-size="15">Chain · token · host · time</text></g>
+    <g transform="translate(660 260)"><rect width="220" height="120" rx="20" fill="#10241d" stroke="#2d6a56"/><text x="110" y="52" fill="#e8fff7" font-size="23" font-weight="700">Audit Ledger</text><text x="110" y="83" fill="#89ad9e" font-size="15">Replay-safe decisions</text></g>
+    <g transform="translate(960 145)"><rect width="180" height="170" rx="20" fill="#173c30" stroke="#5bf0b5"/><text x="90" y="68" fill="#e8fff7" font-size="24" font-weight="700">Service</text><text x="90" y="105" fill="#8cffe0" font-size="17">Grant / reject</text></g>
+  </g>
+  <g stroke="#5bf0b5" stroke-width="4" fill="none"><path d="M280 230h70"/><path d="m338 218 12 12-12 12"/><path d="M580 205h70"/><path d="m638 193 12 12-12 12"/><path d="M580 275h70"/><path d="m638 263 12 12-12 12"/><path d="M880 230h70"/><path d="m938 218 12 12-12 12"/></g>
+  <text x="600" y="450" fill="#789b8e" font-family="system-ui" font-size="17" text-anchor="middle">Deterministic policy decisions · durable evidence · no external database</text>
+</svg>
