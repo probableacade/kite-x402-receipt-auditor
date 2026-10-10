@@ -1,0 +1,7 @@
+const $ = (id) => document.getElementById(id);
+const sample = () => ({id:`pay_demo_${Date.now()}`,payer:"0x1111111111111111111111111111111111111111",payee:"0x2222222222222222222222222222222222222222",chainId:2368,token:"USDC",amount:"1.25",txHash:`0x${crypto.randomUUID().replaceAll("-","").padEnd(64,"a")}`,resource:"https://api.example.com/weather",issuedAt:new Date(Date.now()-10000).toISOString(),expiresAt:new Date(Date.now()+300000).toISOString()});
+function loadSample(){ $("payload").value=JSON.stringify(sample(),null,2) }
+async function refresh(){const data=await fetch("/v1/audits?limit=10").then(r=>r.json());$("history").innerHTML=data.audits.length?data.audits.map(x=>`<div class="item"><strong class="${x.decision.accepted?"accepted":"rejected"}">${x.decision.accepted?"Accepted":"Rejected"}</strong><div>${x.receipt.id}</div><small>${x.receipt.amount} ${x.receipt.token} · risk ${x.decision.riskScore}</small></div>`).join(""):"<p>No audits yet.</p>"}
+async function audit(){try{const response=await fetch("/v1/audits",{method:"POST",headers:{"Content-Type":"application/json"},body:$("payload").value});const data=await response.json();$("result").textContent=JSON.stringify(data,null,2);await refresh()}catch(error){$("result").textContent=error.message}}
+$("sample").onclick=loadSample;$("submit").onclick=audit;$("refresh").onclick=refresh;
+fetch("/healthz").then(r=>r.ok?$("health").textContent="API online":Promise.reject()).catch(()=>$("health").textContent="API offline");loadSample();refresh();

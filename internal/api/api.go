@@ -9,6 +9,7 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/probableacade/kite-x402-receipt-auditor/internal/dashboard"
 	"github.com/probableacade/kite-x402-receipt-auditor/internal/ledger"
 	"github.com/probableacade/kite-x402-receipt-auditor/internal/receipt"
 )
@@ -25,6 +26,7 @@ func (s *Server) Handler() http.Handler {
 	mux.HandleFunc("GET /healthz", s.health)
 	mux.HandleFunc("POST /v1/audits", s.audit)
 	mux.HandleFunc("GET /v1/audits", s.list)
+	mux.Handle("GET /", dashboard.Handler())
 	return withHeaders(mux)
 }
 
@@ -82,7 +84,7 @@ func withHeaders(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("X-Content-Type-Options", "nosniff")
 		w.Header().Set("Referrer-Policy", "no-referrer")
-		if !strings.HasPrefix(r.URL.Path, "/v1/") && r.URL.Path != "/healthz" {
+		if !strings.HasPrefix(r.URL.Path, "/v1/") && r.URL.Path != "/healthz" && r.Method != http.MethodGet {
 			writeError(w, http.StatusNotFound, "not_found", fmt.Sprintf("route %s not found", r.URL.Path))
 			return
 		}
