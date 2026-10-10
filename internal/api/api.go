@@ -26,8 +26,13 @@ func (s *Server) Handler() http.Handler {
 	mux.HandleFunc("GET /healthz", s.health)
 	mux.HandleFunc("POST /v1/audits", s.audit)
 	mux.HandleFunc("GET /v1/audits", s.list)
+	mux.HandleFunc("GET /v1/stats", s.stats)
 	mux.Handle("GET /", dashboard.Handler())
 	return withHeaders(mux)
+}
+
+func (s *Server) stats(w http.ResponseWriter, _ *http.Request) {
+	writeJSON(w, http.StatusOK, s.ledger.Stats())
 }
 
 func (s *Server) health(w http.ResponseWriter, _ *http.Request) {

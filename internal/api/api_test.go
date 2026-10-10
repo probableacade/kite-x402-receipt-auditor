@@ -52,3 +52,13 @@ func TestRejectsUnknownFields(t *testing.T) {
 		t.Fatalf("status=%d", rr.Code)
 	}
 }
+
+func TestStatsReflectAudits(t *testing.T) {
+	s, now := testServer(t)
+	s.Handler().ServeHTTP(httptest.NewRecorder(), httptest.NewRequest(http.MethodPost, "/v1/audits", bytes.NewReader(validBody(now))))
+	rr := httptest.NewRecorder()
+	s.Handler().ServeHTTP(rr, httptest.NewRequest(http.MethodGet, "/v1/stats", nil))
+	if rr.Code != http.StatusOK || !bytes.Contains(rr.Body.Bytes(), []byte(`"accepted":1`)) {
+		t.Fatalf("status=%d body=%s", rr.Code, rr.Body.String())
+	}
+}

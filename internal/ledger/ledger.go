@@ -27,6 +27,12 @@ type Ledger struct {
 	byHash map[string]struct{}
 }
 
+type Stats struct {
+	Total    int `json:"total"`
+	Accepted int `json:"accepted"`
+	Rejected int `json:"rejected"`
+}
+
 func Open(path string) (*Ledger, error) {
 	l := &Ledger{path: path, byID: map[string]struct{}{}, byHash: map[string]struct{}{}}
 	if path == "" {
@@ -84,6 +90,20 @@ func (l *Ledger) List(limit int) []Entry {
 		out[i] = l.items[len(l.items)-1-i]
 	}
 	return out
+}
+
+func (l *Ledger) Stats() Stats {
+	l.mu.RLock()
+	defer l.mu.RUnlock()
+	stats := Stats{Total: len(l.items)}
+	for _, item := range l.items {
+		if item.Decision.Accepted {
+			stats.Accepted++
+		} else {
+			stats.Rejected++
+		}
+	}
+	return stats
 }
 
 func (l *Ledger) persist() error {

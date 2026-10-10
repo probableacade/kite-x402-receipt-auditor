@@ -9,7 +9,7 @@
 <body>
   <main>
     <header><div><span class="eyebrow">KITE PAYMENT SECURITY</span><h1>Receipt Auditor</h1><p>Inspect x402 payment evidence before granting access to a protected resource.</p></div><span id="health" class="pill">Checking API…</span></header>
-    <section class="metrics"><article><span>Network</span><strong>KiteAI Testnet</strong></article><article><span>Chain ID</span><strong>2368</strong></article><article><span>Policy</span><strong>Strict</strong></article></section>
+    <section class="metrics"><article><span>Total audits</span><strong id="total">0</strong></article><article><span>Accepted</span><strong id="accepted">0</strong></article><article><span>Rejected</span><strong id="rejected">0</strong></article></section>
     <section class="grid">
       <article class="panel"><h2>Audit a receipt</h2><textarea id="payload" spellcheck="false"></textarea><div class="actions"><button id="sample">Load sample</button><button id="submit" class="primary">Run audit</button></div><pre id="result">Ready.</pre></article>
       <article class="panel"><div class="row"><h2>Recent decisions</h2><button id="refresh">Refresh</button></div><div id="history" class="history"></div></article>

@@ -30,4 +30,7 @@ func TestLedgerPersistsAndBlocksReplay(t *testing.T) {
 	if got := reopened.List(10); len(got) != 1 || got[0].Receipt.ID != r.ID {
 		t.Fatalf("unexpected entries: %#v", got)
 	}
+	if stats := reopened.Stats(); stats.Total != 1 || stats.Accepted != 1 || stats.Rejected != 0 {
+		t.Fatalf("unexpected stats: %#v", stats)
+	}
 }
