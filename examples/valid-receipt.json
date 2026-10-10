@@ -1,0 +1,12 @@
+{
+  "id": "pay_demo_001",
+  "payer": "0x1111111111111111111111111111111111111111",
+  "payee": "0x2222222222222222222222222222222222222222",
+  "chainId": 2368,
+  "token": "USDC",
+  "amount": "1.25",
+  "txHash": "0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "resource": "https://api.example.com/weather",
+  "issuedAt": "2030-01-01T00:00:00Z",
+  "expiresAt": "2030-01-01T00:05:00Z"
+}
